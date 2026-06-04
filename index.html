@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Common Signal — The Codex Series</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@200;300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f5f2ed;
+    --paper-warm: #ede9e1;
+    --rule: #c8c2b8;
+    --rule-light: #e2ddd6;
+    --muted: #7a7570;
+    --serif: 'EB Garamond', Georgia, serif;
+    --sans: 'Outfit', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--serif); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  /* ── HEADER ── */
+  .site-header { border-bottom: 1px solid var(--rule); padding: 0 clamp(1.5rem, 5vw, 4rem); position: sticky; top: 0; background: var(--paper); z-index: 100; }
+  .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .wordmark { font-family: var(--sans); font-weight: 300; font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+  .wordmark span { display: inline-block; width: 1px; height: 12px; background: var(--rule); margin: 0 10px; vertical-align: middle; }
+  .series-label-nav { font-family: var(--sans); font-weight: 200; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  /* ── HERO ── */
+  .hero { max-width: 1200px; margin: 0 auto; padding: clamp(4rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem) clamp(3rem, 6vw, 6rem); }
+  .hero-eyebrow { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+  .hero-title { font-size: clamp(3rem, 8vw, 7rem); font-weight: 400; line-height: 0.95; letter-spacing: -0.01em; margin-bottom: 2.5rem; max-width: 14ch; }
+  .hero-title em { font-style: italic; color: var(--muted); }
+  .hero-rule { width: 60px; height: 1px; background: var(--ink); margin-bottom: 2rem; }
+  .hero-body { font-size: clamp(1rem, 1.8vw, 1.2rem); line-height: 1.7; color: var(--muted); max-width: 52ch; font-style: italic; }
+
+  /* ── BOOKS GRID ── */
+  .books-section { border-top: 1px solid var(--rule); background: var(--paper-warm); }
+  .books-inner { max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4rem); }
+  .section-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--rule); }
+
+  .book-card { background: var(--paper-warm); padding: clamp(2rem, 4vw, 3.5rem); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 2rem; transition: background 0.25s ease; cursor: pointer; }
+  .book-card:hover { background: #e8e3da; }
+
+  /* ── COVER IMAGE ── */
+  .book-cover-wrap {
+    width: 100%;
+    aspect-ratio: 1/1.414;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .book-meta {}
+  .book-series-tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+  .book-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1rem; }
+  .book-themes { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .theme-tag { font-family: var(--sans); font-size: 0.65rem; font-weight: 300; letter-spacing: 0.06em; color: var(--muted); border: 1px solid var(--rule); padding: 0.25rem 0.6rem; }
+  .book-cta { margin-top: auto; display: flex; align-items: center; gap: 0.75rem; font-family: var(--sans); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+  .book-cta-arrow { width: 24px; height: 1px; background: var(--ink); position: relative; transition: width 0.25s ease; }
+  .book-cta-arrow::after { content: ''; position: absolute; right: 0; top: -3px; width: 6px; height: 6px; border-right: 1px solid var(--ink); border-top: 1px solid var(--ink); transform: rotate(45deg); }
+  .book-card:hover .book-cta-arrow { width: 40px; }
+
+  /* ── THEMES BAND ── */
+  .themes-band { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); overflow: hidden; padding: 1rem 0; background: var(--paper); }
+  .themes-scroll { display: flex; gap: 3rem; animation: scrollThemes 30s linear infinite; white-space: nowrap; width: max-content; }
+  .themes-scroll span { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .themes-scroll span.sep { color: var(--rule); }
+  @keyframes scrollThemes { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── FOOTER ── */
+  .site-footer { border-top: 1px solid var(--rule); padding: 3rem clamp(1.5rem, 5vw, 4rem); }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-copy { font-family: var(--sans); font-size: 0.72rem; font-weight: 300; color: var(--muted); letter-spacing: 0.05em; }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── BOOK DETAIL HERO ── */
+  .book-hero { max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem); display: grid; grid-template-columns: 1fr 2fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  @media (max-width: 680px) { .book-hero { grid-template-columns: 1fr; } .book-cover-hero { max-width: 220px; } }
+
+  .book-cover-hero {
+    width: 100%;
+    aspect-ratio: 1/1.414;
+    overflow: hidden;
+    background: var(--ink);
+  }
+
+  .book-cover-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 2rem; transition: color 0.2s; cursor: pointer; }
+  .back-link:hover { color: var(--ink); }
+  .back-link svg { transition: transform 0.2s; }
+  .back-link:hover svg { transform: translateX(-3px); }
+  .book-hero-series { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .book-hero-title { font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.02em; margin-bottom: 2rem; }
+  .book-hero-synopsis { font-size: 1.05rem; line-height: 1.75; color: var(--muted); font-style: italic; max-width: 52ch; margin-bottom: 2.5rem; padding: 1.5rem 0; border-top: 1px solid var(--rule-light); border-bottom: 1px solid var(--rule-light); }
+
+  .purchase-section { margin-bottom: 2.5rem; }
+  .purchase-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .purchase-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .purchase-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.06em; text-decoration: none; color: var(--paper); background: var(--ink); padding: 0.55rem 1.1rem; transition: background 0.2s; }
+  .purchase-link:hover { background: var(--muted); }
+  .purchase-link.secondary { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+  .purchase-link.secondary:hover { background: var(--rule-light); }
+
+  /* ── TOC ── */
+  .toc-section { border-top: 1px solid var(--rule); background: var(--paper-warm); }
+  .toc-inner { max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem); }
+  .toc-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; gap: 1rem; }
+  .toc-title { font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 400; }
+  .toc-count { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+  .toc-part { margin-bottom: 2.5rem; }
+  .toc-part-label { font-family: var(--sans); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-light); margin-bottom: 0.25rem; }
+  .toc-chapter { display: flex; align-items: baseline; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--rule-light); }
+  .chapter-num { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); min-width: 2rem; flex-shrink: 0; }
+  .chapter-title { font-size: 1rem; font-weight: 400; flex: 1; line-height: 1.4; }
+  .chapter-lock { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--rule); text-transform: uppercase; flex-shrink: 0; }
+  .chapter-open { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--ink); text-transform: uppercase; flex-shrink: 0; }
+  .toc-intro, .toc-conclusion { display: flex; align-items: baseline; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--rule-light); }
+  .toc-intro .chapter-title, .toc-conclusion .chapter-title { font-style: italic; }
+
+  /* ── PREVIEW ── */
+  .preview-section { border-top: 1px solid var(--rule); max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem); }
+  .preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--rule); margin-top: 2rem; }
+  .preview-card { background: var(--paper); padding: 2rem; position: relative; overflow: hidden; }
+  .preview-card.locked { background: var(--paper-warm); cursor: not-allowed; }
+  .preview-chapter-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+  .preview-chapter-title { font-size: 1.15rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.3; }
+  .preview-text { font-size: 0.9rem; line-height: 1.7; color: var(--muted); }
+  .preview-blur { margin-top: 1rem; filter: blur(4px); user-select: none; pointer-events: none; opacity: 0.5; font-size: 0.88rem; line-height: 1.7; }
+  .locked-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 2rem; background: linear-gradient(to bottom, transparent 40%, var(--paper-warm) 75%); }
+  .locked-badge { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--sans); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); padding: 0.4rem 0.8rem; background: var(--paper-warm); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .fade-up:nth-child(1) { animation-delay: 0.05s; }
+  .fade-up:nth-child(2) { animation-delay: 0.15s; }
+  .fade-up:nth-child(3) { animation-delay: 0.25s; }
+  .fade-up:nth-child(4) { animation-delay: 0.35s; }
+
+  @media (max-width: 600px) { .header-inner { height: 56px; } .series-label-nav { display: none; } .books-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href="#" onclick="showPage('home'); return false;">Common Signal<span></span>Publishers</a>
+    <span class="series-label-nav">The Codex Series</span>
+  </div>
+</header>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <p class="hero-eyebrow fade-up">Common Signal — Intellectual Publishing</p>
+    <h1 class="hero-title fade-up">The<br><em>Codex</em><br>Series</h1>
+    <div class="hero-rule fade-up"></div>
+    <p class="hero-body fade-up">A series of books at the intersection of technology, philosophy, economics, and the architecture of civilisation. Each volume explores foundational ideas shaping the world to come.</p>
+  </section>
+
+  <div class="themes-band" aria-hidden="true">
+    <div class="themes-scroll">
+      <span>Technology</span><span class="sep">·</span><span>Philosophy</span><span class="sep">·</span><span>Economics</span><span class="sep">·</span><span>Governance</span><span class="sep">·</span><span>Networks</span><span class="sep">·</span><span>Civilisation</span><span class="sep">·</span><span>Digital Capital</span><span class="sep">·</span><span>Coordination</span><span class="sep">·</span><span>Sovereignty</span><span class="sep">·</span><span>Protocol</span><span class="sep">·</span>
+      <span>Technology</span><span class="sep">·</span><span>Philosophy</span><span class="sep">·</span><span>Economics</span><span class="sep">·</span><span>Governance</span><span class="sep">·</span><span>Networks</span><span class="sep">·</span><span>Civilisation</span><span class="sep">·</span><span>Digital Capital</span><span class="sep">·</span><span>Coordination</span><span class="sep">·</span><span>Sovereignty</span><span class="sep">·</span><span>Protocol</span><span class="sep">·</span>
+    </div>
+  </div>
+
+  <section class="books-section">
+    <div class="books-inner">
+      <div class="section-label">The Codex Series — Two Volumes</div>
+      <div class="books-grid">
+
+        <div class="book-card" onclick="showPage('saylor')" role="link" tabindex="0">
+          <div class="book-cover-wrap">
+            <img src="images/saylor_cover.jpg" alt="The Saylor Codex cover">
+          </div>
+          <div class="book-meta">
+            <p class="book-series-tag">The Codex Series — Volume I</p>
+            <h2 class="book-title">The Saylor Codex</h2>
+            <div class="book-themes">
+              <span class="theme-tag">Digital Capital</span>
+              <span class="theme-tag">Protocol</span>
+              <span class="theme-tag">Energy</span>
+              <span class="theme-tag">Strategy</span>
+            </div>
+          </div>
+          <div class="book-cta">Explore this volume <span class="book-cta-arrow"></span></div>
+        </div>
+
+        <div class="book-card" onclick="showPage('hoskinson')" role="link" tabindex="0">
+          <div class="book-cover-wrap">
+            <img src="images/hosk_cover.jpg" alt="The Hoskinson Codex cover">
+          </div>
+          <div class="book-meta">
+            <p class="book-series-tag">The Codex Series — Volume II</p>
+            <h2 class="book-title">The Hoskinson Codex</h2>
+            <div class="book-themes">
+              <span class="theme-tag">Governance</span>
+              <span class="theme-tag">Coordination</span>
+              <span class="theme-tag">Networks</span>
+              <span class="theme-tag">Civilisation</span>
+            </div>
+          </div>
+          <div class="book-cta">Explore this volume <span class="book-cta-arrow"></span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© Common Signal. All rights reserved.</p>
+      <p class="footer-copy">The Codex Series</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════ SAYLOR PAGE ═══════════ -->
+<div id="page-saylor" class="page">
+  <div class="book-hero">
+    <div class="book-cover-hero">
+      <img src="images/saylor_cover.jpg" alt="The Saylor Codex cover">
+    </div>
+    <div class="book-hero-meta">
+      <a class="back-link" onclick="showPage('home'); return false;" href="#">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M5 1L1 5l4 4M1 5h12" stroke="currentColor" stroke-width="1"/></svg>
+        All books
+      </a>
+      <p class="book-hero-series">The Codex Series — Volume I</p>
+      <h1 class="book-hero-title">The Saylor<br>Codex</h1>
+      <p class="book-hero-synopsis">Synopsis coming soon. This space will contain a detailed description of the book's themes, arguments, and scope — exploring digital capital, protocol convergence, and the long arc of monetary civilisation.</p>
+      <div class="purchase-section">
+        <p class="purchase-label">Available from</p>
+        <div class="purchase-links">
+          <a href="#" class="purchase-link">Amazon</a>
+          <a href="#" class="purchase-link secondary">Apple Books</a>
+          <a href="#" class="purchase-link secondary">Kobo</a>
+          <a href="#" class="purchase-link secondary">Google Play</a>
+          <a href="#" class="purchase-link secondary">Barnes &amp; Noble</a>
+        </div>
+      </div>
+      <div class="book-themes">
+        <span class="theme-tag">Technology</span><span class="theme-tag">Philosophy</span><span class="theme-tag">Economics</span><span class="theme-tag">Digital Capital</span><span class="theme-tag">Networks</span><span class="theme-tag">Civilisation</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="toc-section">
+    <div class="toc-inner">
+      <div class="toc-header">
+        <h2 class="toc-title">Table of Contents</h2>
+        <span class="toc-count">15 Chapters · 5 Parts</span>
+      </div>
+      <div class="toc-intro"><span class="chapter-num">—</span><span class="chapter-title">Introduction</span><span class="chapter-open">Readable</span></div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part I — Foundations</p>
+        <div class="toc-chapter"><span class="chapter-num">01</span><span class="chapter-title">The Problem of Defective Money</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">02</span><span class="chapter-title">The Logic of Protocol Convergence</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">03</span><span class="chapter-title">Digital Capital</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part II — Time and Energy</p>
+        <div class="toc-chapter"><span class="chapter-num">04</span><span class="chapter-title">The Economics of Time</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">05</span><span class="chapter-title">Wealth as Stored Energy</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">06</span><span class="chapter-title">Entropy and Civilisation</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part III — Networks</p>
+        <div class="toc-chapter"><span class="chapter-num">07</span><span class="chapter-title">The Internet of Value</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">08</span><span class="chapter-title">Monetary Gravity</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">09</span><span class="chapter-title">The Dominant Protocol</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part IV — Strategy</p>
+        <div class="toc-chapter"><span class="chapter-num">10</span><span class="chapter-title">Conviction</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">11</span><span class="chapter-title">Volatility and Time Horizon</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">12</span><span class="chapter-title">Capital Allocation</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part V — Civilization</p>
+        <div class="toc-chapter"><span class="chapter-num">13</span><span class="chapter-title">Sovereignty</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">14</span><span class="chapter-title">Property Rights</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">15</span><span class="chapter-title">The Long Future</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-conclusion"><span class="chapter-num">—</span><span class="chapter-title">Conclusion: The Age of Digital Capital</span><span class="chapter-lock">Locked</span></div>
+    </div>
+  </section>
+
+  <section class="preview-section">
+    <div class="section-label">Reading Preview</div>
+    <div class="preview-grid" style="grid-template-columns: 1fr;">
+      <div class="preview-card">
+        <p class="preview-chapter-label">Introduction</p>
+        <h3 class="preview-chapter-title">The Architecture of a Mind</h3>
+        <p class="preview-text" style="font-style:italic; margin-bottom:1.5rem; color: var(--muted);">"Bitcoin is hope."</p>
+        <p class="preview-text">In the summer of 2020, Michael Saylor stood at a crossroads that would redefine both his company and, in time, his place in monetary history. The Federal Reserve had just taken interest rates to zero. The pandemic had shuttered economies. Saylor held half a billion dollars in corporate cash that was now, in his engineering mind, sitting in a building with the roof removed. He had spent the better part of three decades building MicroStrategy into a global business intelligence firm. He had also, it turned out, spent those same decades accumulating the precise set of intellectual tools — thermodynamics, control theory, the history of science, nonlinear systems modelling — that would allow him to see what most other executives could not: that the monetary problem was an engineering problem, and that it had been solved.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">The weeks that followed produced a decision that stunned the financial world. MicroStrategy converted its entire treasury reserve into Bitcoin, then trading at roughly nine thousand dollars a coin, and Saylor went public with an argument so sprawling in its historical and scientific reach that it took most of his listeners years to follow it to its conclusion. Five years on, the company, renamed Strategy, holds more Bitcoin than any other public corporation on earth, and the argument Saylor made in 2020 has been partially vindicated in ways that have made some of his most fervent critics quietly disappear.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">The pages that follow reconstruct the connected intellectual framework beneath that argument. The aim is to trace the reasoning from its foundations in physics and monetary history through to its consequences for individual wealth, institutional finance, and civilisational design. Saylor's public corpus runs to thousands of hours of interviews, keynotes, and conversations accumulated over half a decade of relentless advocacy. The ideas within it are real and consistent, but they arrive dispersed across time and medium, and they reward the kind of patient reconstruction this book attempts.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">The perspective is analytical throughout. The goal is to understand the argument on its own terms: to trace how its components fit together and why, taken as a whole, the framework holds a coherence that no partial account of it captures. Whether the reader ends by agreeing or disagreeing with Saylor's thesis, they will find here an account of it that does justice to its actual scope.</p>
+
+        <h4 style="font-family: var(--sans); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">The Engineer as Thinker</h4>
+        <p class="preview-text">Saylor describes himself, first and last, as an engineer. The description carries more weight than it might seem. At MIT, where he studied aerospace engineering on an Air Force scholarship, his training was in the design of systems under constraint: understanding the physical laws governing a domain and finding the most elegant solution within those laws. His thesis was a computer simulation of the dynamic feedback interactions between judicial, legislative, and executive branches in a Renaissance Italian city-state, modelling the political system of Machiavelli's Discourses as a set of differential equations with different time constants. He was doing what engineers do: taking a complex system apart, finding its governing parameters, and watching what happens when you vary them.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">The concept of the time constant became a lodestone. In a dynamic system, the time constant is the characteristic duration over which the system responds to change. A judiciary serving lifetime appointments has a long time constant; a legislature elected every two years has a short one. The interplay of these constants determines whether a political economy stabilises or oscillates into dysfunction. Years later, when Saylor encountered Bitcoin, he recognised in it a monetary system with an unusual time constant: one that was, in a precise thermodynamic sense, infinite. The supply was hard-capped. There was no decay, no leakage, no authority with the power to alter the fundamental parameters. The engineering insight this triggered was the seed of everything that followed.</p>
+
+        <h4 style="font-family: var(--sans); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">A Note on the Framework</h4>
+        <p class="preview-text">Saylor's thinking spans a range that is unusual for a figure operating primarily in the world of finance. He reaches back to Xenophon's Persia to explain monetary convergence. He uses thermodynamics to explain digital scarcity. He cites Max Planck on the sociology of paradigm shifts and John D. Rockefeller on the economics of refining. He connects the gauge of Roman chariot wheels to the global adoption of standard shipping containers, and from there to the inevitability of a dominant digital monetary network.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">What the framework asks of its reader is a willingness to hold multiple time horizons simultaneously. Saylor thinks in centuries. He analyses Bitcoin across the arc of monetary history, from the Bronze Age emergence of gold as a convergence point for warring cultures through to the digital monetary network he believes is now being built. Individual market cycles, quarterly earnings, the anxieties of a given week: these are background noise against the larger signal. The reader who meets the argument at its own time scale will find it considerably more powerful than the accounts of it that circulate in financial media, which almost uniformly engage with its surface rather than its structure.</p>
+      </div>
+
+      <div class="preview-card locked" style="min-height: 220px;">
+        <p class="preview-chapter-label">Chapter 1 onwards</p>
+        <h3 class="preview-chapter-title">The Problem of Defective Money</h3>
+        <p class="preview-blur">Every monetary system in history has been subject to the same fundamental vulnerability: the authority that issues the money can debase it. Gold solved this problem partially, for a time, but gold was heavy, divisible only at cost, and ultimately seizeable by the same sovereigns who used it. The history of money is a history of this tension — between the need for a reliable store of value and the tendency of power to corrupt every medium that has served that function...</p>
+        <div class="locked-overlay">
+          <span class="locked-badge"><svg width="10" height="12" viewBox="0 0 10 12" fill="none"><rect x="1" y="5" width="8" height="7" rx="1" stroke="currentColor" stroke-width="1"/><path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="currentColor" stroke-width="1"/></svg>Purchase to read</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© Common Signal. All rights reserved.</p>
+      <a class="back-link" onclick="showPage('home'); return false;" href="#" style="margin:0;">← Back to all books</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════ HOSKINSON PAGE ═══════════ -->
+<div id="page-hoskinson" class="page">
+  <div class="book-hero">
+    <div class="book-cover-hero">
+      <img src="images/hosk_cover.jpg" alt="The Hoskinson Codex cover">
+    </div>
+    <div class="book-hero-meta">
+      <a class="back-link" onclick="showPage('home'); return false;" href="#">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M5 1L1 5l4 4M1 5h12" stroke="currentColor" stroke-width="1"/></svg>
+        All books
+      </a>
+      <p class="book-hero-series">The Codex Series — Volume II</p>
+      <h1 class="book-hero-title">The Hoskinson<br>Codex</h1>
+      <p class="book-hero-synopsis">Synopsis coming soon. This space will contain a detailed description of the book's themes, arguments, and scope — exploring governance, coordination, trust architectures, and the design of civilisational systems.</p>
+      <div class="purchase-section">
+        <p class="purchase-label">Available from</p>
+        <div class="purchase-links">
+          <a href="#" class="purchase-link">Amazon</a>
+          <a href="#" class="purchase-link secondary">Apple Books</a>
+          <a href="#" class="purchase-link secondary">Kobo</a>
+          <a href="#" class="purchase-link secondary">Google Play</a>
+          <a href="#" class="purchase-link secondary">Barnes &amp; Noble</a>
+        </div>
+      </div>
+      <div class="book-themes">
+        <span class="theme-tag">Technology</span><span class="theme-tag">Philosophy</span><span class="theme-tag">Governance</span><span class="theme-tag">Coordination</span><span class="theme-tag">Networks</span><span class="theme-tag">Civilisation</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="toc-section">
+    <div class="toc-inner">
+      <div class="toc-header">
+        <h2 class="toc-title">Table of Contents</h2>
+        <span class="toc-count">20 Chapters · 5 Parts</span>
+      </div>
+      <div class="toc-intro"><span class="chapter-num">—</span><span class="chapter-title">Introduction</span><span class="chapter-open">Readable</span></div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part I — Human Systems</p>
+        <div class="toc-chapter"><span class="chapter-num">01</span><span class="chapter-title">The Problem of Coordination</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">02</span><span class="chapter-title">Institutions and Time</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">03</span><span class="chapter-title">Incentives and Human Nature</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">04</span><span class="chapter-title">Legitimacy and Consent</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part II — Networks of Trust</p>
+        <div class="toc-chapter"><span class="chapter-num">05</span><span class="chapter-title">The Architecture of Trust</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">06</span><span class="chapter-title">Identity in the Digital Age</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">07</span><span class="chapter-title">Decentralization</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">08</span><span class="chapter-title">Governance Without Kings</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part III — The Science of Governance</p>
+        <div class="toc-chapter"><span class="chapter-num">09</span><span class="chapter-title">Constitutions for Machines</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">10</span><span class="chapter-title">Treasury and Collective Action</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">11</span><span class="chapter-title">Open Source Civilization</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">12</span><span class="chapter-title">Adaptive Institutions</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part IV — Technology as Social Infrastructure</p>
+        <div class="toc-chapter"><span class="chapter-num">13</span><span class="chapter-title">Blockchains and Coordination</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">14</span><span class="chapter-title">The Internet of Institutions</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">15</span><span class="chapter-title">The Economics of Networks</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">16</span><span class="chapter-title">Artificial Intelligence and Governance</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part V — Civilization</p>
+        <div class="toc-chapter"><span class="chapter-num">17</span><span class="chapter-title">The Knowledge Engine</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">18</span><span class="chapter-title">The Future of Democracy</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">19</span><span class="chapter-title">Freedom and Coordination</span><span class="chapter-lock">Locked</span></div>
+        <div class="toc-chapter"><span class="chapter-num">20</span><span class="chapter-title">The Next Social Operating System</span><span class="chapter-lock">Locked</span></div>
+      </div>
+      <div class="toc-conclusion"><span class="chapter-num">—</span><span class="chapter-title">Conclusion: Building the Future</span><span class="chapter-lock">Locked</span></div>
+    </div>
+  </section>
+
+  <section class="preview-section">
+    <div class="section-label">Reading Preview</div>
+    <div class="preview-grid" style="grid-template-columns: 1fr;">
+      <div class="preview-card">
+        <p class="preview-chapter-label">Introduction</p>
+        <h3 class="preview-chapter-title">The Coordination Problem</h3>
+        <p class="preview-text" style="font-style:italic; margin-bottom:1.5rem; color: var(--muted);">Every question that matters in the end resolves into a single question: how do people act together?</p>
+        <p class="preview-text">Not how they think together, or feel together, or hope together, but how they actually move in the same direction across time, across distance, across differences of interest and language and culture and need. The history of civilization is, at its deepest level, a history of partial answers to this question. Empires, religions, markets, constitutions, currencies, courts, protocols: each represents a technology for causing large numbers of strangers to behave in ways that serve a collective purpose without requiring constant negotiation, without requiring personal acquaintance, and without requiring that all parties share identical goals.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">Charles Hoskinson thinks about this problem constantly. His public body of work, accumulated across hundreds of hours of livestreams, lectures, interviews, and recorded conversations, returns again and again to the same underlying terrain. Beneath discussions of blockchain architecture, voting systems, treasury design, monetary policy, digital identity, scientific funding, regulatory frameworks, and the future of democratic institutions, a single preoccupation recurs with remarkable consistency: the difficulty of getting human beings to cooperate at scale, and the challenge of building systems capable of enabling that cooperation reliably and durably across generations.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">This book is an attempt to reconstruct the intellectual framework that makes those recurring preoccupations coherent. It is not a biography. It is not a history of Cardano. It is not a summary of positions taken on particular controversies. It is an effort to understand what a person must believe about human nature, about institutions, about technology, and about civilization for the positions Hoskinson takes across a range of domains to emerge from a single coherent worldview rather than from a collection of unrelated opinions.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">The thesis that organizes everything else is this: coordination is the foundational problem of human civilization, and the history of civilization is best understood as a sequence of increasingly sophisticated attempts to solve it. Economics, politics, law, religion, technology, culture: each of these domains is, at root, a domain of coordination mechanism design. Each evolved to answer some version of the question: how do we get people to cooperate reliably when they cannot know or trust each other personally, when their interests diverge, and when the benefits of cooperation will only materialize across timescales longer than any individual's capacity to act?</p>
+
+        <h4 style="font-family: var(--sans); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">The Four Components</h4>
+        <p class="preview-text">The coordination problem has several components, worth naming separately because Hoskinson addresses each of them. The first is <em>scale</em>. Small groups coordinate with relative ease — in communities where everyone knows everyone, reputation does most of the work. But as groups grow beyond the scale where personal knowledge is possible, coordination becomes harder. The mechanisms that work at village scale fail at city scale, and the mechanisms that work at city scale break down at the level of the nation-state, the global market, or the decentralized network spanning millions of anonymous participants.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">The second component is <em>time</em>. Cooperation requires not just that individuals act together today, but that commitments made today remain binding tomorrow, that institutions built by one generation retain their function for the next, and that the accumulated knowledge and norms that make large-scale cooperation possible are preserved and transmitted rather than lost.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">The third component is <em>trust</em>. At the foundation of every coordination mechanism is some solution to the problem of trust: some way of allowing parties who cannot directly verify each other's intentions or capabilities to commit credibly to cooperative behavior. Legal systems solve this through enforcement. Currencies solve it through convertibility. Cryptography solves it through mathematics: by making certain commitments verifiable without requiring trust in any individual or institution.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">The fourth component is <em>incentive alignment</em>. Coordination fails not primarily because individuals are malicious, but because well-designed systems often produce perverse incentives and poorly designed systems almost always do. The history of failed institutions is less a history of corruption than a history of misalignment: systems that rewarded behavior destructive to collective goals while punishing behavior necessary to them. Hoskinson returns repeatedly to the insight that systems succeed or fail based on the incentives they create, not on the intentions of the people operating within them. This is not a counsel of cynicism; it is a design principle.</p>
+
+        <h4 style="font-family: var(--sans); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2rem; margin-bottom: 1rem;">The Framework</h4>
+        <p class="preview-text">The framework Hoskinson applies to these problems draws on a wide range of intellectual traditions without fully belonging to any of them. He is not a pure libertarian, though he shares libertarianism's skepticism of centralized authority. He is not a techno-utopian, though he believes technology can solve problems that politics has failed to solve. He is perhaps best understood as a systems thinker with a particular interest in the governance problem: the challenge of designing systems that remain functional, legitimate, and adaptive as the conditions they operate in change.</p>
+        <p class="preview-text" style="margin-top:1.2rem;">What distinguishes Hoskinson's synthesis is not that any of these elements is new, but that he consistently applies them to a single question: what would it take to build institutional infrastructure adequate to the coordination problems of the twenty-first century? That question has technological dimensions, but it is not fundamentally a technological question. It is a question about human nature, about incentive design, about legitimacy, and about the conditions under which large groups of people can sustain cooperative behavior over time.</p>
+      </div>
+
+      <div class="preview-card locked" style="min-height: 220px;">
+        <p class="preview-chapter-label">Chapter 1 onwards</p>
+        <h3 class="preview-chapter-title">The Problem of Coordination</h3>
+        <p class="preview-blur">Coordination failures are not rare exceptions in human history. They are the norm. The wonder is not that societies have failed to coordinate — it is that they have ever managed to do so at all, given the scale of the obstacles. A group of ten people solving a coordination problem faces nothing like the challenges facing a group of ten million...</p>
+        <div class="locked-overlay">
+          <span class="locked-badge"><svg width="10" height="12" viewBox="0 0 10 12" fill="none"><rect x="1" y="5" width="8" height="7" rx="1" stroke="currentColor" stroke-width="1"/><path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="currentColor" stroke-width="1"/></svg>Purchase to read</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© Common Signal. All rights reserved.</p>
+      <a class="back-link" onclick="showPage('home'); return false;" href="#" style="margin:0;">← Back to all books</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + id);
+    if (page) { page.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  }
+  document.querySelectorAll('.book-card').forEach(card => {
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') card.click(); });
+  });
+</script>
+</body>
+</html>
