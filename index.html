@@ -140,6 +140,7 @@
   .chapter-title { font-size: 1rem; font-weight: 400; flex: 1; line-height: 1.4; }
   .chapter-lock { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--rule); text-transform: uppercase; flex-shrink: 0; }
   .chapter-open { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--ink); text-transform: uppercase; flex-shrink: 0; }
+  .chapter-open:hover { text-decoration: underline !important; }
   .toc-intro, .toc-conclusion { display: flex; align-items: baseline; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--rule-light); }
   .toc-intro .chapter-title, .toc-conclusion .chapter-title { font-style: italic; }
 
@@ -278,7 +279,7 @@
         <h2 class="toc-title">Table of Contents</h2>
         <span class="toc-count">15 Chapters · 5 Parts</span>
       </div>
-      <div class="toc-intro"><span class="chapter-num">—</span><span class="chapter-title">Introduction</span><span class="chapter-open">Readable</span></div>
+      <div class="toc-intro"><span class="chapter-num">—</span><span class="chapter-title">Introduction</span><a class="chapter-open" href="#saylor-preview" style="text-decoration:none;">↓ Read</a></div>
       <div class="toc-part">
         <p class="toc-part-label">Part I — Foundations</p>
         <div class="toc-chapter"><span class="chapter-num">01</span><span class="chapter-title">The Problem of Defective Money</span><span class="chapter-lock">Locked</span></div>
@@ -313,7 +314,7 @@
     </div>
   </section>
 
-  <section class="preview-section">
+  <section class="preview-section" id="saylor-preview">
     <div class="section-label">Reading Preview</div>
     <div class="preview-grid" style="grid-template-columns: 1fr;">
       <div class="preview-card">
@@ -389,7 +390,7 @@
         <h2 class="toc-title">Table of Contents</h2>
         <span class="toc-count">20 Chapters · 5 Parts</span>
       </div>
-      <div class="toc-intro"><span class="chapter-num">—</span><span class="chapter-title">Introduction</span><span class="chapter-open">Readable</span></div>
+      <div class="toc-intro"><span class="chapter-num">—</span><span class="chapter-title">Introduction</span><a class="chapter-open" href="#hoskinson-preview" style="text-decoration:none;">↓ Read</a></div>
       <div class="toc-part">
         <p class="toc-part-label">Part I — Human Systems</p>
         <div class="toc-chapter"><span class="chapter-num">01</span><span class="chapter-title">The Problem of Coordination</span><span class="chapter-lock">Locked</span></div>
@@ -429,7 +430,7 @@
     </div>
   </section>
 
-  <section class="preview-section">
+  <section class="preview-section" id="hoskinson-preview">
     <div class="section-label">Reading Preview</div>
     <div class="preview-grid" style="grid-template-columns: 1fr;">
       <div class="preview-card">
