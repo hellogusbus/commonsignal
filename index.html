@@ -117,7 +117,12 @@
   .back-link:hover svg { transform: translateX(-3px); }
   .book-hero-series { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
   .book-hero-title { font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.02em; margin-bottom: 2rem; }
-  .book-hero-synopsis { font-size: 1.05rem; line-height: 1.75; color: var(--muted); font-style: italic; max-width: 52ch; margin-bottom: 2.5rem; padding: 1.5rem 0; border-top: 1px solid var(--rule-light); border-bottom: 1px solid var(--rule-light); }
+  .book-hero-synopsis { font-size: 1.05rem; line-height: 1.75; color: var(--muted); font-style: italic; max-width: 52ch; margin-bottom: 1.5rem; padding: 1.5rem 0; border-top: 1px solid var(--rule-light); border-bottom: 1px solid var(--rule-light); }
+  .start-reading-btn { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--sans); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--ink); border: 1px solid var(--ink); padding: 0.65rem 1.2rem; margin-bottom: 2.5rem; transition: background 0.2s, color 0.2s; }
+  .start-reading-btn:hover { background: var(--ink); color: var(--paper); }
+  .start-reading-arrow { width: 20px; height: 1px; background: currentColor; position: relative; transition: width 0.2s; }
+  .start-reading-arrow::after { content: ''; position: absolute; right: 0; bottom: -3px; width: 5px; height: 5px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg); }
+  .start-reading-btn:hover .start-reading-arrow { width: 30px; }
 
   .purchase-section { margin-bottom: 2.5rem; }
   .purchase-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
@@ -257,6 +262,7 @@
       <p class="book-hero-series">The Codex Series — Volume I</p>
       <h1 class="book-hero-title">The Saylor<br>Codex</h1>
       <p class="book-hero-synopsis">Drawing on hundreds of public interviews and presentations, The Saylor Codex reconstructs Michael Saylor's worldview as a coherent framework for understanding money, technology, energy, capital, and sovereignty. From monetary history to digital capital, it explores the ideas behind one of the most influential voices in the Bitcoin era.</p>
+      <a href="#saylor-preview" class="start-reading-btn">Start Reading <span class="start-reading-arrow"></span></a>
       <div class="purchase-section">
         <p class="purchase-label">Available from</p>
         <div class="purchase-links">
@@ -368,6 +374,7 @@
       <p class="book-hero-series">The Codex Series — Volume II</p>
       <h1 class="book-hero-title">The Hoskinson<br>Codex</h1>
       <p class="book-hero-synopsis">Based on an extensive body of lectures, livestreams, and public discussions, The Hoskinson Codex presents Charles Hoskinson's ideas on governance, institutional design, cryptography, and human coordination. It examines how decentralized technologies may reshape trust, legitimacy, and the structures through which modern civilization organizes itself.</p>
+      <a href="#hoskinson-preview" class="start-reading-btn">Start Reading <span class="start-reading-arrow"></span></a>
       <div class="purchase-section">
         <p class="purchase-label">Available from</p>
         <div class="purchase-links">
