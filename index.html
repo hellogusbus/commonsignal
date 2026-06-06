@@ -3,25 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Common Signal — The Codex Series</title>
+
+<!-- =============================================
+     PRIMARY SEO META TAGS
+     ============================================= -->
+<title>The Codex Series — Common Signal Publishers</title>
+<meta name="description" content="The Codex Series by Common Signal Publishers. Three volumes exploring the thinkers, systems, and narratives shaping the modern world — technology, economics, governance, and civilisation.">
+<meta name="keywords" content="Codex Series, Common Signal, intellectual publishing, Hoskinson Codex, Saylor Codex, Curry Dvorak Codex, technology books, governance, digital capital, philosophy, economics">
+<meta name="author" content="Common Signal Publishers">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+
+<!-- Canonical URL — update to your actual domain -->
+<link rel="canonical" href="https://common-signal.org/">
+
+<!-- =============================================
+     OPEN GRAPH (Facebook, LinkedIn, WhatsApp, etc.)
+     ============================================= -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Common Signal Publishers">
+<meta property="og:title" content="The Codex Series — Common Signal Publishers">
+<meta property="og:description" content="Three volumes exploring the thinkers, systems, and narratives shaping the modern world. Technology, economics, governance, and civilisation.">
+<meta property="og:url" content="https://common-signal.org/">
+<!-- Update og:image to an absolute URL of your social share image (1200×630px recommended) -->
+<meta property="og:image" content="https://common-signal.org/images/og-codex-series.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Codex Series — Common Signal Publishers">
+<meta property="og:locale" content="en_GB">
+
+<!-- =============================================
+     TWITTER / X CARD
+     ============================================= -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@commonsignal">
+<meta name="twitter:creator" content="@commonsignal">
+<meta name="twitter:title" content="The Codex Series — Common Signal Publishers">
+<meta name="twitter:description" content="Three volumes exploring the thinkers, systems, and narratives shaping the modern world. Technology, economics, governance, and civilisation.">
+<meta name="twitter:image" content="https://common-signal.org/images/og-codex-series.png">
+<meta name="twitter:image:alt" content="The Codex Series — Common Signal Publishers">
+
+<!-- =============================================
+     STRUCTURED DATA — JSON-LD
+     ============================================= -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://common-signal.org/#organization",
+      "name": "Common Signal Publishers",
+      "alternateName": "Common Signal",
+      "url": "https://common-signal.org/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://common-signal.org/images/logo.png"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Angelfish House"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://common-signal.org/#website",
+      "url": "https://common-signal.org/",
+      "name": "Common Signal Publishers",
+      "description": "Intellectual publishing exploring the thinkers, systems, and narratives shaping the modern world.",
+      "publisher": {
+        "@id": "https://common-signal.org/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://common-signal.org/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://common-signal.org/#webpage",
+      "url": "https://common-signal.org/",
+      "name": "The Codex Series — Common Signal Publishers",
+      "description": "A series exploring the thinkers, systems, and narratives shaping the modern world.",
+      "isPartOf": {
+        "@id": "https://common-signal.org/#website"
+      },
+      "about": {
+        "@id": "https://common-signal.org/#organization"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://common-signal.org/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "The Codex Series",
+            "item": "https://common-signal.org/"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BookSeries",
+      "@id": "https://common-signal.org/#codex-series",
+      "name": "The Codex Series",
+      "description": "A series exploring the thinkers, systems, and narratives shaping the modern world. From technology and economics to media, governance, and civilization.",
+      "publisher": {
+        "@id": "https://common-signal.org/#organization"
+      },
+      "url": "https://common-signal.org/",
+      "hasPart": [
+        {
+          "@type": "Book",
+          "name": "The Hoskinson Codex",
+          "url": "https://common-signal.org/hoskinson.html",
+          "position": 1,
+          "genre": ["Governance", "Coordination", "Networks", "Civilisation"],
+          "image": "https://common-signal.org/images/hosk_cover.png",
+          "publisher": {
+            "@id": "https://common-signal.org/#organization"
+          }
+        },
+        {
+          "@type": "Book",
+          "name": "The Saylor Codex",
+          "url": "https://common-signal.org/saylor.html",
+          "position": 2,
+          "genre": ["Digital Capital", "Protocol", "Energy", "Strategy"],
+          "image": "https://common-signal.org/images/saylor_cover.png",
+          "publisher": {
+            "@id": "https://common-signal.org/#organization"
+          }
+        },
+        {
+          "@type": "Book",
+          "name": "The Curry Dvorak Codex",
+          "url": "https://common-signal.org/currydvorak.html",
+          "position": 3,
+          "genre": ["Media", "Narrative", "Influence", "Culture"],
+          "image": "https://common-signal.org/images/currydvorak_cover2.png",
+          "publisher": {
+            "@id": "https://common-signal.org/#organization"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- =============================================
+     PERFORMANCE & RESOURCE HINTS
+     ============================================= -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Preload key assets — update paths to match your actual font/image files -->
+<link rel="preload" href="styles.css" as="style">
+<link rel="preload" href="images/hosk_cover.png" as="image">
+<link rel="preload" href="images/saylor_cover.png" as="image">
+
+<!-- =============================================
+     FAVICONS — add your actual icon files
+     ============================================= -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="site-header">
+<!-- Skip to content — improves accessibility and crawlability -->
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
   <div class="header-inner">
     <a class="wordmark" href="index.html">Common Signal<span></span>Publishers</a>
     <span class="series-label-nav">The Codex Series</span>
   </div>
 </header>
 
+<main id="main-content">
 <section class="hero">
   <p class="hero-eyebrow fade-up">Common Signal — Intellectual Publishing</p>
   <h1 class="hero-title fade-up">The<br><em>Codex</em><br>Series</h1>
   <div class="hero-rule fade-up"></div>
- <p class="hero-body fade-up">A series exploring the thinkers, systems, and narratives shaping the modern world. From technology and economics to media, governance, and civilization, each volume presents a coherent framework for understanding the forces of our time.</p>
+  <p class="hero-body fade-up">A series exploring the thinkers, systems, and narratives shaping the modern world. From technology and economics to media, governance, and civilization, each volume presents a coherent framework for understanding the forces of our time.</p>
 </section>
 
 <div class="themes-band" aria-hidden="true">
@@ -38,7 +216,7 @@
 
       <a class="book-card" href="hoskinson.html">
         <div class="book-cover-wrap">
-          <img src="images/hosk_cover.png" alt="The Hoskinson Codex cover">
+          <img src="images/hosk_cover.png" alt="The Hoskinson Codex — Volume I of the Codex Series by Common Signal Publishers" loading="eager" width="400" height="600">
         </div>
         <div class="book-meta">
           <p class="book-series-tag">The Codex Series — Volume I</p>
@@ -55,7 +233,7 @@
 
       <a class="book-card" href="saylor.html">
         <div class="book-cover-wrap">
-          <img src="images/saylor_cover.png" alt="The Saylor Codex cover">
+          <img src="images/saylor_cover.png" alt="The Saylor Codex — Volume II of the Codex Series by Common Signal Publishers" loading="lazy" width="400" height="600">
         </div>
         <div class="book-meta">
           <p class="book-series-tag">The Codex Series — Volume II</p>
@@ -74,9 +252,11 @@
   </div>
 </section>
 
-<footer class="site-footer">
+</main>
+
+<footer class="site-footer" role="contentinfo">
   <div class="footer-inner">
-    <p class="footer-copy">© Common Signal, part of Angelfish House. All rights reserved.</p>
+    <p class="footer-copy">© <time datetime="2025">2025</time> Common Signal, part of Angelfish House. All rights reserved.</p>
     <p class="footer-copy">The Codex Series</p>
   </div>
 </footer>
