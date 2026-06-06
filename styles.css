@@ -23,6 +23,20 @@ body { background: var(--paper); color: var(--ink); font-family: var(--serif); -
 .wordmark span { display: inline-block; width: 1px; height: 12px; background: var(--rule); margin: 0 10px; vertical-align: middle; }
 .series-label-nav { font-family: var(--sans); font-weight: 200; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: 0.5rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
 /* ── HERO ── */
 .hero { max-width: 1200px; margin: 0 auto; padding: clamp(4rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem) clamp(3rem, 6vw, 6rem); }
 .hero-eyebrow { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
